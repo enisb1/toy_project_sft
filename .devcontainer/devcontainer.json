@@ -1,0 +1,29 @@
+{
+    "name": "ML Dev Environment (CUDA 13.0)",
+    "image": "kesava89/paperspace-cuda130-vllm-m2",
+    "runArgs": [
+        "--gpus=all",
+        "--ipc=host",
+        "--shm-size=8g"
+    ],
+    "forwardPorts": [8888, 6006],
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/bin/python3",
+                "python.terminal.activateEnvironment": true,
+                "editor.formatOnSave": true
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.jupyter-renderers",
+                "charliermarsh.ruff",
+                "GitHub.copilot"
+            ]
+        }
+    },
+    "remoteUser": "root",
+    "overrideCommand": false
+}

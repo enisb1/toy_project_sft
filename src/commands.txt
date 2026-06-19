@@ -1,0 +1,16 @@
+- Run MLFlow locally:
+python -m mlflow server --host 127.0.0.1 --port 5000
+
+- Inference:
+1. bash src/serve.sh
+2. then in another terminal:
+   python src/infer.py
+
+- Training:
+just execute train.py
+
+- Evaluation:
+1. run train.py, copy the printed run_id
+2. paste it into TRAINING_RUN_ID in evaluate.py (to save data to same mlflow run)
+3. python src/evaluate.py
+
