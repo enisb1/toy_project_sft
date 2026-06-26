@@ -26,8 +26,8 @@ def train():
     ds = load_data(TRAIN_SUBSET, TEST_SUBSET)
 
     peft_config = LoraConfig(
-        r=8,
-        lora_alpha=8,
+        r=16,
+        lora_alpha=32,
         lora_dropout=0,
         bias="none",
         task_type="CAUSAL_LM",
@@ -37,22 +37,21 @@ def train():
     # to use only assistant's loss, you
     patched_tok = get_patched_tokenizer()
 
+    # add weight decay?
     args = SFTConfig(
         output_dir=OUTPUT_DIR,
         num_train_epochs=NUM_EPOCHS,
-        per_device_train_batch_size=2,
-        gradient_accumulation_steps=8,  # effective batch = 16
-        learning_rate=1e-5,
+        per_device_train_batch_size=4,
+        gradient_accumulation_steps=8,  # effective batch = 32
+        learning_rate=5e-5,
         lr_scheduler_type="cosine",
-        warmup_ratio=0.03,
-        weight_decay=0.01,
+        warmup_ratio=0.1,
         gradient_checkpointing=True,
         max_length=MAX_LENGTH,
         assistant_only_loss=True,  # loss on assistant turns only
-        packing=False,  # keep off; packing + masking is fiddly
         bf16=torch.cuda.is_bf16_supported(),
         fp16=not torch.cuda.is_bf16_supported(),
-        logging_steps=5,
+        logging_steps=10,
         eval_strategy="no",
         eval_steps=5,
         save_strategy="epoch",

@@ -1,0 +1,10 @@
+{
+  "base": {
+    "arc_easy": 0.605,
+    "mmlu_abstract_algebra": 0.28
+  },
+  "sft": {
+    "arc_easy": 0.61,
+    "mmlu_abstract_algebra": 0.29
+  }
+}
